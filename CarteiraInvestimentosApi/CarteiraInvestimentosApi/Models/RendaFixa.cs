@@ -8,6 +8,7 @@
         public decimal Rendimento { get; set; }
         public DateTime Vencimento { get; set; }
         public string Liquidez { get; set; }
+        public bool IsActive { get; set; }
         public decimal Custos { get; set; }
         public int CarteiraId { get; set; }
         public Carteira Carteira { get; set; }

@@ -54,6 +54,18 @@ namespace CarteiraInvestimentosApi.Controllers
             
             return Ok(tesouroDiretos);
         }
+        [HttpGet("ativos")]
+        public async Task<ActionResult<IEnumerable<TesouroDireto>>> GetTesouroDiretosAtivos()
+        {
+            var tesouroDiretos = _context.TesouroDiretos.Where(c => c.IsActive).
+                Include(c => c.IndexadorRendimentos);
+            if (tesouroDiretos == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(tesouroDiretos);
+        }
 
         // PUT: api/TesouroDiretos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

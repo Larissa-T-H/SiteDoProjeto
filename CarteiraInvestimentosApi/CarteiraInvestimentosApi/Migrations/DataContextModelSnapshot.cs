@@ -216,6 +216,9 @@ namespace CarteiraInvestimentosApi.Migrations
                     b.Property<int>("IndexadorRendimentosId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Liquidez")
                         .HasColumnType("TEXT");
 
@@ -326,6 +329,9 @@ namespace CarteiraInvestimentosApi.Migrations
                     b.Property<int>("IndexadorRendimentosId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Liquidez")
                         .HasColumnType("TEXT");
 
@@ -406,19 +412,19 @@ namespace CarteiraInvestimentosApi.Migrations
             modelBuilder.Entity("CarteiraInvestimentosApi.Models.Movimentacao", b =>
                 {
                     b.HasOne("CarteiraInvestimentosApi.Models.Poupanca", "Poupanca")
-                        .WithMany()
+                        .WithMany("Movimentacoes")
                         .HasForeignKey("PoupancaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CarteiraInvestimentosApi.Models.RendaFixa", "RendaFixa")
-                        .WithMany()
+                        .WithMany("Movimentacoes")
                         .HasForeignKey("RendaFixaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CarteiraInvestimentosApi.Models.RendaVariavel", "RendaVariavel")
-                        .WithMany()
+                        .WithMany("Movimentacoes")
                         .HasForeignKey("RendaVariavelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -430,7 +436,7 @@ namespace CarteiraInvestimentosApi.Migrations
                         .IsRequired();
 
                     b.HasOne("CarteiraInvestimentosApi.Models.TesouroDireto", "TesouroDireto")
-                        .WithMany()
+                        .WithMany("Movimentacoes")
                         .HasForeignKey("TesouroDiretoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -486,7 +492,7 @@ namespace CarteiraInvestimentosApi.Migrations
                         .IsRequired();
 
                     b.HasOne("CarteiraInvestimentosApi.Models.ProdutoRendaFixa", "ProdutoRendaFixa")
-                        .WithMany()
+                        .WithMany("RendaFixas")
                         .HasForeignKey("ProdutoRendaFixaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -554,12 +560,37 @@ namespace CarteiraInvestimentosApi.Migrations
                     b.Navigation("IndexadorRendimentos");
                 });
 
+            modelBuilder.Entity("CarteiraInvestimentosApi.Models.Poupanca", b =>
+                {
+                    b.Navigation("Movimentacoes");
+                });
+
+            modelBuilder.Entity("CarteiraInvestimentosApi.Models.ProdutoRendaFixa", b =>
+                {
+                    b.Navigation("RendaFixas");
+                });
+
             modelBuilder.Entity("CarteiraInvestimentosApi.Models.ProdutoRendaVariavel", b =>
                 {
                     b.Navigation("RendaVariavels");
                 });
 
+            modelBuilder.Entity("CarteiraInvestimentosApi.Models.RendaFixa", b =>
+                {
+                    b.Navigation("Movimentacoes");
+                });
+
+            modelBuilder.Entity("CarteiraInvestimentosApi.Models.RendaVariavel", b =>
+                {
+                    b.Navigation("Movimentacoes");
+                });
+
             modelBuilder.Entity("CarteiraInvestimentosApi.Models.StatusMovimentacao", b =>
+                {
+                    b.Navigation("Movimentacoes");
+                });
+
+            modelBuilder.Entity("CarteiraInvestimentosApi.Models.TesouroDireto", b =>
                 {
                     b.Navigation("Movimentacoes");
                 });

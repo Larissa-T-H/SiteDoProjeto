@@ -56,6 +56,20 @@ namespace CarteiraInvestimentosApi.Controllers
 
             return Ok(rendaVariavel);
         }
+        [HttpGet("ativos")]
+        public async Task<ActionResult<IEnumerable<RendaVariavel>>> GetRendaVariaveisAtivo()
+        {
+            var rendaVariavel = _context.RendaVariaveis.Where(c => c.IsActive).
+                Include(c => c.Movimentacoes).Include(c => c.ProdutoRendaVariavel).
+                Include(c => c.Banco);
+
+            if (rendaVariavel == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(rendaVariavel);
+        }
         // PUT: api/RendaVariavels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

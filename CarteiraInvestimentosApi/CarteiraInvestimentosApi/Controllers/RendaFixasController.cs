@@ -56,9 +56,23 @@ namespace CarteiraInvestimentosApi.Controllers
 
             return Ok(rendaFixa);
         }
-        // PUT: api/RendaFixas/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpGet("ativos")]
+        public async Task<ActionResult<IEnumerable<RendaVariavel>>> GetRendaFixaAtivo()
+        {
+            var rendaFixa = _context.RendaFixas.Where(c => c.IsActive).
+                    Include(c => c.Movimentacoes).Include(c => c.ProdutoRendaFixa).
+                    Include(c => c.Banco);
+
+            if (rendaFixa == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(rendaFixa);
+        }
+            // PUT: api/RendaFixas/5
+            // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+            [HttpPut("{id}")]
         public async Task<IActionResult> PutRendaFixa(int id, RendaFixa rendaFixa)
         {
             if (id != rendaFixa.RendaFixaId)

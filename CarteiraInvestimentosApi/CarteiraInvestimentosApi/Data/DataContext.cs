@@ -18,8 +18,6 @@ namespace CarteiraInvestimentosApi.Data
         public DbSet<StatusMovimentacao> StatusMovimentacoes { get; set; }
         public DbSet<TesouroDireto> TesouroDiretos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
-        {
-        }
+        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
     }
 }

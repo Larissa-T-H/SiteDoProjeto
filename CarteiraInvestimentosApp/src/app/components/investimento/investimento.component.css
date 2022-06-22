@@ -1,0 +1,20 @@
+.container{
+    margin: 30px 180px;
+    
+}
+select{
+    margin-bottom: 15px;
+    padding: 12px;
+    height: 45px;
+    border-radius: 10px;
+    justify-content: center;
+    border-color: black;
+}
+.estilo {
+    width: 100%;
+    padding: 12px;
+    height: 45px;
+    justify-content: center;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}

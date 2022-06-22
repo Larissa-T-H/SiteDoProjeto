@@ -41,6 +41,18 @@ namespace CarteiraInvestimentosApi.Controllers
 
             return poupanca;
         }
+        [HttpGet("ativos")]
+        public async Task<ActionResult<IEnumerable<Poupanca>>> GetPoupancaAtivo()
+        {
+            var poupanca =  _context.Poupancas.Where(c=>c.IsActive);
+
+            if (poupanca == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(poupanca);
+        }
 
         // PUT: api/Poupancas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
