@@ -7,6 +7,6 @@ namespace CarteiraInvestimentosApi.Models
         public int IndexadorRendimentosId { get; set; }
         [Required]
         [StringLength(100)]
-        public int IndexadorRendimentosNome { get; set; }
+        public string IndexadorRendimentosNome { get; set; }
     }
 }

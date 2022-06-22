@@ -8,5 +8,6 @@ namespace CarteiraInvestimentosApi.Models
         [Required]
         [StringLength(100)]
         public string ProdutoRendaVariavelNome { get; set; }
+        public IEnumerable<RendaVariavel> RendaVariavels { get; set; }
     }
 }
