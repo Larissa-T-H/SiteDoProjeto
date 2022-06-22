@@ -15,6 +15,6 @@
         public Banco Banco { get; set; }
         public int IndexadorRendimentosId { get; set; }
         public IndexadorRendimentos IndexadorRendimentos { get; set; }
-        IEnumerable<Movimentacao> Movimentacoes { get; set; }
+        public IEnumerable<Movimentacao> Movimentacoes { get; set; }
     }
 }

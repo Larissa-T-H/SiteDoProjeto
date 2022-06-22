@@ -25,7 +25,8 @@ namespace CarteiraInvestimentosApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RendaVariavel>>> GetRendaVariaveis()
         {
-            return await _context.RendaVariaveis.ToListAsync();
+            return await _context.RendaVariaveis.Include(c => c.Movimentacoes).Include(c => c.ProdutoRendaVariavel).
+                Include(c=>c.Banco).ToListAsync();
         }
 
         // GET: api/RendaVariavels/5
@@ -41,7 +42,20 @@ namespace CarteiraInvestimentosApi.Controllers
 
             return rendaVariavel;
         }
+        [HttpGet("produto/{id}")]
+        public async Task<ActionResult<IEnumerable<RendaVariavel>>> GetRendaVariaveisPorProduto(int id)
+        {
+            var rendaVariavel = _context.RendaVariaveis.Where(c => c.ProdutoRendaVariavelId == id).
+                Include(c => c.Movimentacoes).Include(c => c.ProdutoRendaVariavel).
+                Include(c => c.Banco);
 
+            if (rendaVariavel == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(rendaVariavel);
+        }
         // PUT: api/RendaVariavels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

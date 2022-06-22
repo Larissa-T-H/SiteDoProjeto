@@ -25,7 +25,8 @@ namespace CarteiraInvestimentosApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RendaFixa>>> GetRendaFixas()
         {
-            return await _context.RendaFixas.ToListAsync();
+            return await _context.RendaFixas.Include(c => c.Movimentacoes).Include(c => c.ProdutoRendaFixa).
+                Include(c => c.Banco).ToListAsync();
         }
 
         // GET: api/RendaFixas/5
@@ -41,7 +42,20 @@ namespace CarteiraInvestimentosApi.Controllers
 
             return rendaFixa;
         }
+        [HttpGet("produto/{id}")]
+        public async Task<ActionResult<IEnumerable<RendaFixa>>> GetRendaFixasPorProduto(int id)
+        {
+            var rendaFixa = _context.RendaFixas.Where(c => c.ProdutoRendaFixaId == id).
+                Include(c => c.Movimentacoes).Include(c => c.ProdutoRendaFixa).
+                Include(c => c.Banco);
 
+            if (rendaFixa == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(rendaFixa);
+        }
         // PUT: api/RendaFixas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

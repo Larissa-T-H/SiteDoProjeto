@@ -41,7 +41,46 @@ namespace CarteiraInvestimentosApi.Controllers
 
             return movimentacao;
         }
-
+        [HttpGet("poup/{id}")]
+        public async Task<ActionResult<IEnumerable<Movimentacao>>> GetMovimentacoesPoupanca(int id)
+        {
+            var movimentacao = _context.Movimentacoes.Where(c => c.PoupancaId == id).Include(c=> c.Poupanca);
+            if (movimentacao == null)
+            {
+                return NotFound();
+            }
+            return Ok(movimentacao);
+        }
+         [HttpGet("rendaFixa/{id}")]
+        public async Task<ActionResult<IEnumerable<Movimentacao>>> GetMovimentacoesRendaFixa(int id)
+        {
+            var movimentacao = _context.Movimentacoes.Where(c => c.RendaFixaId == id).Include(c=> c.RendaFixa);
+            if (movimentacao == null)
+            {
+                return NotFound();
+            }
+            return Ok(movimentacao);
+        }
+        [HttpGet("rendaVariavel/{id}")]
+        public async Task<ActionResult<IEnumerable<Movimentacao>>> GetMovimentacoesRendaVariavel(int id)
+        {
+            var movimentacao = _context.Movimentacoes.Where(c => c.RendaVariavelId == id).Include(c => c.RendaVariavel);
+            if (movimentacao == null)
+            {
+                return NotFound();
+            }
+            return Ok(movimentacao);
+        }
+        [HttpGet("tesouro/{id}")]
+        public async Task<ActionResult<IEnumerable<Movimentacao>>> GetMovimentacoesTesouro(int id)
+        {
+            var movimentacao = _context.Movimentacoes.Where(c => c.TesouroDiretoId == id).Include(c => c.TesouroDireto);
+            if (movimentacao == null)
+            {
+                return NotFound();
+            }
+            return Ok(movimentacao);
+        }
         // PUT: api/Movimentacoes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

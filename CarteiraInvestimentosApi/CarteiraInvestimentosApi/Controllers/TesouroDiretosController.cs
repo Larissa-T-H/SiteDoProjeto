@@ -43,9 +43,9 @@ namespace CarteiraInvestimentosApi.Controllers
             return tesouroDireto;
         }
         [HttpGet("indexador/{id}")]
-        public async Task<ActionResult<IEnumerable<TesouroDireto>>> GetTesouroDiretosPorIndexador(int indexadorId)
+        public async Task<ActionResult<IEnumerable<TesouroDireto>>> GetTesouroDiretosPorIndexador(int id)
         {
-            var tesouroDiretos =  _context.TesouroDiretos.Where(c => c.IndexadorRendimentosId == indexadorId).
+            var tesouroDiretos =  _context.TesouroDiretos.Where(c => c.IndexadorRendimentosId == id).
                 Include(c => c.IndexadorRendimentos);
             if (tesouroDiretos == null)
             {
